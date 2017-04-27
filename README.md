@@ -1,12 +1,33 @@
 # vRealize Orchestrator Encryption Plugin
 
-An inventory-less vRO plugin to provide Encoding, Digest, Cipher, and RSA Encryption.
+## Overview
+An inventory-less vRealize Orchestrator (vRO) plugin to provide Encoding, Digest, Cipher, and RSA Encryption.
 
-When an integration or automation project needed some encryption, we typically used either CryptoJS or JSEncrypt on top of the Rhino Javascript runtime.
+When an integration or automation project with vRO needed some encryption, developers typically used either CryptoJS or JSEncrypt on top of the Rhino Javascript runtime of Orchestrator.
 
-This provides similar methods, is compatible with binary data and is exponentially faster.
+This plugin provides similar methods, is compatible with binary data and is exponentially more efficient with CPU time.
 
 ![](crypto_api_explorer.png)
+
+## Try it out
+
+Latest stable compiled plugin can be found at [releases](https://github.com/vmware/o11n-plugin-crypto/releases)
+
+Add it to your Orchestrator as any other plugin.
+
+### Prerequisites
+
+* vRealize Orchestrator (vRO) 7.0 or greater
+
+### Build From Source
+
+1. Get access to a /vco-repo from a running vRO VM.  Typical URL is http://*vro.corp.local*:8280/vco-repo.  Note the version of your Orchestrator for use in the build command (Ex: 7.1.0, 7.2.0)
+2. mvn clean install -Dvco.version=*7.1.0* -DrepoUrl=http://*vro.corp.local*:8280/vco-repo
+3. The compiled plugin will be in the *target* directory
+
+## Documentation
+
+Please see the project [wiki](https://github.com/vmware/o11n-plugin-crypto/wiki) for usage samples.
 
 ## Contributing
 
