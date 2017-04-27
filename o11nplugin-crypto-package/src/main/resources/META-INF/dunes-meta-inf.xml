@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>127.0.0.1:8230</comment>
+<entry key="pkg-description">Encryption Helper Plugin package</entry>
+<entry key="pkg-name">com.vmware.o11n.plugin.crypto.crypto</entry>
+<entry key="used-plugins">Crypto#1.0.0</entry>
+<entry key="pkg-owner">My Company</entry>
+<entry key="pkg-id">186056964020271505611351683903$rootElement.hashCode()000000000000</entry>
+</properties>

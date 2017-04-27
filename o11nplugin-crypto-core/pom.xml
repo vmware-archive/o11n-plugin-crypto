@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>o11nplugin-crypto-core</artifactId>
+  <packaging>jar</packaging>
+
+  <parent>
+    <artifactId>crypto</artifactId>
+    <groupId>com.vmware.o11n.plugin</groupId>
+    <version>1.0.0</version>
+  </parent>
+
+<repositories>
+    <repository>
+      <id>vco</id>
+      <url>${repoUrl}</url>
+    </repository>
+</repositories>
+<pluginRepositories>
+    <pluginRepository>
+      <id>vco-maven</id>
+      <name>vCO Maven Plugin Repository</name>
+      <url>${repoUrl}</url>
+    </pluginRepository>
+</pluginRepositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.vmware.o11n</groupId>
+      <artifactId>o11n-provided-deps</artifactId>
+      <scope>provided</scope>
+      <type>pom</type>
+    </dependency>
+
+    <dependency>
+      <groupId>com.vmware.o11n</groupId>
+      <artifactId>o11n-sdkapi</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.o11n</groupId>
+      <artifactId>o11n-spring-tools</artifactId>
+    </dependency>
+    <dependency>
+    	<groupId>net.oauth.core</groupId>
+    	<artifactId>oauth</artifactId>
+    	<version>20100527</version>
+    </dependency>
+    <dependency>
+    	<groupId>com.vmware.o11n</groupId>
+    	<artifactId>o11n-model</artifactId>
+    	<version>7.1.0</version>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>junit</groupId>
+    	<artifactId>junit</artifactId>
+    	<version>4.12</version>
+    	<scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
