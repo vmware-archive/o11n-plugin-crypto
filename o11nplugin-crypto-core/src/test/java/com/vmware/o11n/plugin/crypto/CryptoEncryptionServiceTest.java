@@ -29,16 +29,6 @@ public class CryptoEncryptionServiceTest {
 	private final String staticString = "Hello World!!";
 	private final String staticSecret = "VMware1!";
 
-	/**
-	 *
-	 *
-	 * @throws InvalidKeyException
-	 * @throws NoSuchAlgorithmException
-	 * @throws NoSuchPaddingException
-	 * @throws InvalidAlgorithmParameterException
-	 * @throws BadPaddingException
-	 * @throws IllegalBlockSizeException
-	 */
 	@Test
 	public void aesTestStaticAES128() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
 		String ivB64 = service.generateRandomBytes(16);
@@ -56,14 +46,7 @@ public class CryptoEncryptionServiceTest {
 	}
 
 	/**
-	 * Requires unlimited strength JRE Policy files which are part of vRO
-	 *
-	 * @throws InvalidKeyException
-	 * @throws NoSuchAlgorithmException
-	 * @throws NoSuchPaddingException
-	 * @throws InvalidAlgorithmParameterException
-	 * @throws BadPaddingException
-	 * @throws IllegalBlockSizeException
+	 * This test requires unlimited strength JRE Policy files which are part of vRO
 	 */
 	@Test
 	public void aesTestStaticAES256() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
@@ -93,6 +76,9 @@ public class CryptoEncryptionServiceTest {
 		assertEquals("AES128 Random", dataB64, decryptedB64);
 	}
 
+	/**
+	 * This test requires unlimited strength JRE Policy files which are part of vRO
+	 */
 	@Test
 	public void aesTestRandomAES256() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
 		String ivB64 = service.generateRandomBytes(16);
@@ -105,9 +91,58 @@ public class CryptoEncryptionServiceTest {
 		assertEquals("AES256 Random", dataB64, decryptedB64);
 	}
 
+	@Test (expected=IllegalArgumentException.class)
+	public void aesTestShortBlockAES256() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+		String ivB64 = service.generateRandomBytes(15); //reason for expected failure
+		String dataB64 = service.generateRandomBytes(2343);
+		String secretB64 = service.generateRandomBytes(32);
+
+		String encryptedB64 = service.aesEncrypt(dataB64, secretB64, ivB64);
+		String decryptedB64 = service.aesDecrypt(encryptedB64, secretB64, ivB64);
+
+		assertEquals("AES256 Random", dataB64, decryptedB64);
+	}
+
 	@Test
 	public void testRandom3DES192() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
-		String ivB64 = service.generateRandomBytes(16);
+		String ivB64 = service.generateRandomBytes(8);
+		String dataB64 = service.generateRandomBytes(2343);
+		String secretB64 = service.generateRandomBytes(24);
+
+		String encryptedB64 = service.tripleDesEncrypt(dataB64, secretB64, ivB64);
+		String decryptedB64 = service.tripleDesDecrypt(encryptedB64, secretB64, ivB64);
+
+		assertEquals("3DES Random 192key", dataB64, decryptedB64);
+	}
+
+	@Test (expected=InvalidKeyException.class)
+	public void testRandom3DES128() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+		String ivB64 = service.generateRandomBytes(8);
+		String dataB64 = service.generateRandomBytes(2343);
+		String secretB64 = service.generateRandomBytes(16); //short secret.  reason for expected failure
+
+		String encryptedB64 = service.tripleDesEncrypt(dataB64, secretB64, ivB64);
+		String decryptedB64 = service.tripleDesDecrypt(encryptedB64, secretB64, ivB64);
+
+		assertEquals("3DES Random 128key", dataB64, decryptedB64);
+	}
+
+	@Test
+	public void testRandom3DES256() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+		String ivB64 = service.generateRandomBytes(8);
+		String dataB64 = service.generateRandomBytes(2343);
+		String secretB64 = service.generateRandomBytes(32); //extra long secret
+
+		String encryptedB64 = service.tripleDesEncrypt(dataB64, secretB64, ivB64);
+		String decryptedB64 = service.tripleDesDecrypt(encryptedB64, secretB64, ivB64);
+
+		assertEquals("3DES Random 256key", dataB64, decryptedB64);
+	}
+
+
+	@Test (expected=IllegalArgumentException.class)
+	public void testShortBlock3DES192() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+		String ivB64 = service.generateRandomBytes(7); //reason for expected failure
 		String dataB64 = service.generateRandomBytes(2343);
 		String secretB64 = service.generateRandomBytes(24);
 
