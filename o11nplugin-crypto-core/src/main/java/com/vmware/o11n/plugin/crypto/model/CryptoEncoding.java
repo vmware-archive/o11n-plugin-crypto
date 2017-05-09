@@ -4,6 +4,8 @@
  */
 package com.vmware.o11n.plugin.crypto.model;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.commons.codec.DecoderException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,7 +34,7 @@ public class CryptoEncoding {
 	}
 
 	@VsoMethod(description="Base64 Encoder")
-	public String base64Encode(@VsoParam(description="Data to encode") String data) {
+	public String base64Encode(@VsoParam(description="Data to encode") String data) throws UnsupportedEncodingException {
 		return service.base64Encode(data);
 	}
 

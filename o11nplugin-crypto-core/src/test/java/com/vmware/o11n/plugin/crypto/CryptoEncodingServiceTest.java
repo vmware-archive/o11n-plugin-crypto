@@ -6,6 +6,8 @@ package com.vmware.o11n.plugin.crypto;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.commons.codec.DecoderException;
 import org.junit.Test;
 
@@ -20,7 +22,7 @@ public class CryptoEncodingServiceTest {
 	private final String staticStringB64 = "SGVsbG8gV29ybGQhIQ==";
 
 	@Test
-	public void staticB64EncodeTest() {
+	public void staticB64EncodeTest() throws UnsupportedEncodingException {
 		assertEquals("staticB64Encode", staticStringB64, service.base64Encode(staticString));
 	}
 	@Test

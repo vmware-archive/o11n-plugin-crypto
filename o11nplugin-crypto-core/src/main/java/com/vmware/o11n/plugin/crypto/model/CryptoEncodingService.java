@@ -4,6 +4,9 @@
  */
 package com.vmware.o11n.plugin.crypto.model;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
@@ -19,9 +22,10 @@ public class CryptoEncodingService {
 	 *
 	 * @param data
 	 * @return
+	 * @throws UnsupportedEncodingException
 	 */
-	public String base64Encode(String data) {
-		String encoded = new String(Base64.encodeBase64(data.getBytes()));
+	public String base64Encode(String data) throws UnsupportedEncodingException {
+		String encoded = new String(Base64.encodeBase64(data.getBytes(StandardCharsets.UTF_8)));
 		return encoded;
 	}
 
@@ -31,7 +35,7 @@ public class CryptoEncodingService {
 	 * @return
 	 */
 	public String base64Decode(String b64data) {
-		String decoded = new String(Base64.decodeBase64(b64data));
+		String decoded = new String(Base64.decodeBase64(b64data), StandardCharsets.UTF_8);
 		return decoded;
 	}
 

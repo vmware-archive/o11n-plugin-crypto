@@ -6,6 +6,7 @@ package com.vmware.o11n.plugin.crypto;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -30,7 +31,7 @@ public class CryptoEncryptionServiceTest {
 	private final String staticSecret = "VMware1!";
 
 	@Test
-	public void aesTestStaticAES128() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+	public void aesTestStaticAES128() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
 		String ivB64 = service.generateRandomBytes(16);
 		String dataB64 = encodingService.base64Encode(staticString);
 		String secretB64 = digestService.md5Base64(encodingService.base64Encode(staticSecret));
@@ -47,9 +48,10 @@ public class CryptoEncryptionServiceTest {
 
 	/**
 	 * This test requires unlimited strength JRE Policy files which are part of vRO
+	 * @throws UnsupportedEncodingException
 	 */
 	@Test
-	public void aesTestStaticAES256() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+	public void aesTestStaticAES256() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
 		String ivB64 = service.generateRandomBytes(16);
 		String dataB64 = encodingService.base64Encode(staticString);
 		String secretB64 = digestService.sha256Base64(encodingService.base64Encode(staticSecret));
