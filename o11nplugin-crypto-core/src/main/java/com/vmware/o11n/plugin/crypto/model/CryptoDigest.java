@@ -78,4 +78,33 @@ public class CryptoDigest {
 	public String sha512(@VsoParam(description="Plain String to hash with SHA512") String data) {
 		return service.sha512(data);
 	}
+
+	@VsoMethod(description = "Returns HmacMD5 MAC for the given key and data Base64 encoded")
+	public String hmacMd5(@VsoParam(description="Secret Key Base64 encoded") String keyB64,
+							@VsoParam(description="Data to sign Base64 encoded") String dataB64) {
+		return service.hmacMd5(keyB64, dataB64);
+	}
+
+	@VsoMethod(description = "Returns HmacSHA1 MAC for the given key and data Base64 encoded")
+	public String hmacSha1(@VsoParam(description="Secret Key Base64 encoded") String keyB64,
+							@VsoParam(description="Data to sign Base64 encoded") String dataB64) {
+		return service.hmacSha1(keyB64, dataB64);
+	}
+	@VsoMethod(description = "Returns HmacSHA256 MAC for the given key and data Base64 encoded")
+	public String hmacSha256(@VsoParam(description="Secret Key Base64 encoded") String keyB64,
+							@VsoParam(description="Data to sign Base64 encoded") String dataB64) {
+		return service.hmacSha256(keyB64, dataB64);
+	}
+
+	@VsoMethod(description = "Returns HmacSHA384 MAC for the given key and data Base64 encoded")
+	public String hmacSha384(@VsoParam(description="Secret Key Base64 encoded") String keyB64,
+							@VsoParam(description="Data to sign Base64 encoded") String dataB64) {
+		return service.hmacSha384(keyB64, dataB64);
+	}
+
+	@VsoMethod(description = "Returns HmacSHA512 MAC for the given key and data Base64 encoded")
+	public String hmacSha512(@VsoParam(description="Secret Key Base64 encoded") String keyB64,
+							@VsoParam(description="Data to sign Base64 encoded") String dataB64) {
+		return service.hmacSha512(keyB64, dataB64);
+	}
 }
