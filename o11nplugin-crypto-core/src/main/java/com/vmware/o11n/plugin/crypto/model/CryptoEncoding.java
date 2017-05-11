@@ -73,16 +73,16 @@ public class CryptoEncoding {
 		return service.binaryConcatBase64(b64data1, b64data2);
 	}
 
-	@VsoMethod(description="Decodes a Base64 String and returns the number of bytes that were encoded.")
-	public int getLengthBase64(@VsoParam(description="Base64 data ")  String b64data) {
+	@VsoMethod(description="Decodes a Base64 String and returns the number of bytes that were encoded.",vsoReturnType="Number")
+	public int getLengthBase64(@VsoParam(description="Base64 data")  String b64data) {
 		return service.getLengthBase64(b64data);
 	}
 
 	@VsoMethod(description="Returns a subset of bytes from a Base64 encoded string")
 	public String getSubsetBase64(
 			@VsoParam(description="Base64 data") String b64data,
-			@VsoParam(description="Starting byte index to get subset of data (inclusive). Starts at 0") int start,
-			@VsoParam(description="number of bytes to return.  Must be 1 or greater") int length) {
+			@VsoParam(description="Starting byte index to get subset of data (inclusive). Starts at 0",vsoType="Number") int start,
+			@VsoParam(description="number of bytes to return.  Must be 1 or greater",vsoType="Number") int length) {
 		if (length < 1) {
 			throw new IllegalArgumentException("length must be 1 or greater");
 		}
