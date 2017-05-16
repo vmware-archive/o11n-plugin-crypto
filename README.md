@@ -27,7 +27,7 @@ Add it to your Orchestrator as any other plugin.
 
 ## Documentation
 
-Please see the project [wiki](https://github.com/vmware/o11n-plugin-crypto/wiki) for usage samples.
+Please see the project [wiki](https://github.com/vmware/o11n-plugin-crypto/wiki) for plugin documentation and usage samples.
 
 ## Contributing
 
