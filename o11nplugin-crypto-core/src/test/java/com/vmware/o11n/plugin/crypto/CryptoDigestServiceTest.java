@@ -19,7 +19,8 @@ public class CryptoDigestServiceTest {
 	CryptoDigestService service = new CryptoDigestService();
 	CryptoEncodingService encodingService = new CryptoEncodingService();
 
-	private final String dataToDigest = "SGVsbG8gV29ybGQhIQ=="; // "Hello World!!" base64 encoded
+	private final String dataToDigestB64 = "SGVsbG8gV29ybGQhIQ=="; // "Hello World!!" base64 encoded
+	private final String dataToDigest = "Hello World!!";
 
 	//hmacSha1 sample data from AWS docs
 	private final String stringToSign = "GET\n\n\nTue, 27 Mar 2007 19:36:42 +0000\n/johnsmith/photos/puppy.jpg";
@@ -27,30 +28,59 @@ public class CryptoDigestServiceTest {
 	private final String expectedHmacSha1SigB64 = "bWq2s1WEIj+Ydj0vQ697zp+IXMU=";
 
 	@Test
-	public void md5Base64() {
+	public void md5() {
 		final String expectedResult = "y/QTR7sZePbzIIeyzwHjUQ==";
-		assertEquals("MD5Sum", expectedResult, service.md5Base64(dataToDigest));
+		assertEquals("MD5", expectedResult, service.md5(dataToDigest));
 	}
 
 	@Test
+	public void md5Base64() {
+		final String expectedResult = "y/QTR7sZePbzIIeyzwHjUQ==";
+		assertEquals("MD5 Base64", expectedResult, service.md5Base64(dataToDigestB64));
+	}
+
+	@Test
+	public void sha1() {
+		final String expectedResult = "pqfIFYs01VSVSkySGxRPgtddtoM=";
+		assertEquals("SHA1", expectedResult, service.sha1(dataToDigest));
+	}
+	@Test
 	public void sha1Base64() {
 		final String expectedResult = "pqfIFYs01VSVSkySGxRPgtddtoM=";
-		assertEquals("SHA1", expectedResult, service.sha1Base64(dataToDigest));
+		assertEquals("SHA1 Base64", expectedResult, service.sha1Base64(dataToDigestB64));
+	}
+
+	@Test
+	public void sha256() {
+		final String expectedResult = "CWwKcsMfmi1lEm2OikAaKrLy4h0KKCpv/mZCu+9l/9k=";
+		assertEquals("SHA256", expectedResult, service.sha256(dataToDigest));
 	}
 	@Test
 	public void sha256Base64() {
 		final String expectedResult = "CWwKcsMfmi1lEm2OikAaKrLy4h0KKCpv/mZCu+9l/9k=";
-		assertEquals("SHA256", expectedResult, service.sha256Base64(dataToDigest));
+		assertEquals("SHA256 Base64", expectedResult, service.sha256Base64(dataToDigestB64));
+	}
+
+	@Test
+	public void sha384() {
+		final String expectedResult = "3GmJaU4n2IldLCBoqu22RM0gLwvZA/tUNvYhwqrt7Jk1k0aQSy59ndKRWUFCY3GP";
+		assertEquals("SHA384", expectedResult, service.sha384(dataToDigest));
 	}
 	@Test
 	public void sha384Base64() {
 		final String expectedResult = "3GmJaU4n2IldLCBoqu22RM0gLwvZA/tUNvYhwqrt7Jk1k0aQSy59ndKRWUFCY3GP";
-		assertEquals("SHA384", expectedResult, service.sha384Base64(dataToDigest));
+		assertEquals("SHA384 Base64", expectedResult, service.sha384Base64(dataToDigestB64));
+	}
+
+	@Test
+	public void sha512() {
+		final String expectedResult = "ZKaYjsDsrL30Ds9QTnC5pfYXSomSyFbH7iLh4L4DqIkEEpBLnRekZ9A1Wf5XPDJCcWFdvPGR5M/CWbWgGju4JA==";
+		assertEquals("SHA512", expectedResult, service.sha512(dataToDigest));
 	}
 	@Test
 	public void sha512Base64() {
 		final String expectedResult = "ZKaYjsDsrL30Ds9QTnC5pfYXSomSyFbH7iLh4L4DqIkEEpBLnRekZ9A1Wf5XPDJCcWFdvPGR5M/CWbWgGju4JA==";
-		assertEquals("SHA512", expectedResult, service.sha512Base64(dataToDigest));
+		assertEquals("SHA512 Base64", expectedResult, service.sha512Base64(dataToDigestB64));
 	}
 
 
