@@ -7,6 +7,8 @@ package com.vmware.o11n.plugin.crypto.model;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.codec.DecoderException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
@@ -26,6 +28,8 @@ description="Provides methods to encode/decode strings between different encodin
 public class CryptoEncoding {
 	public static final String TYPE = "CryptoEncoding";
 
+	private final Logger log = LoggerFactory.getLogger(CryptoEncoding.class);
+
 	@Autowired
 	private CryptoEncodingService service;
 
@@ -35,6 +39,11 @@ public class CryptoEncoding {
 
 	@VsoMethod(description="Base64 Encoder")
 	public String base64Encode(@VsoParam(description="Data to encode") String data) throws UnsupportedEncodingException {
+		return service.base64Encode(data);
+	}
+
+	@VsoMethod(description="Base64 Encoder")
+	public String base64EncodeBytes(@VsoParam(description="Data to encode") byte[] data) throws UnsupportedEncodingException {
 		return service.base64Encode(data);
 	}
 

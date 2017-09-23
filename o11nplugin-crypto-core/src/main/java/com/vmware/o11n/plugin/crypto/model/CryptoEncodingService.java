@@ -8,9 +8,12 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.bouncycastle.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import ch.dunes.model.fileattachment.MimeAttachment;
@@ -18,6 +21,7 @@ import ch.dunes.model.fileattachment.MimeAttachment;
 @Component
 public class CryptoEncodingService {
 
+	private final Logger log = LoggerFactory.getLogger(CryptoEncodingService.class);
 	/**
 	 *
 	 * @param data
@@ -28,7 +32,16 @@ public class CryptoEncodingService {
 		String encoded = new String(Base64.encodeBase64(data.getBytes(StandardCharsets.UTF_8)));
 		return encoded;
 	}
-
+	/**
+	 *
+	 * @param data
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public String base64Encode(byte[] data) throws UnsupportedEncodingException {
+		String encoded = new String(Base64.encodeBase64(data));
+		return encoded;
+	}
 	/**
 	 *
 	 * @param b64data
@@ -130,4 +143,90 @@ public class CryptoEncodingService {
 		System.arraycopy(data, start, subset, 0, length);
 		return Base64.encodeBase64String(subset);
 	}
+
+	/**
+	 *
+	 * @param data
+	 * @return
+	 */
+	public String base32Encode(String data) {
+		Base32 b32 = new Base32();
+		return b32.encodeAsString(data.getBytes(StandardCharsets.UTF_8));
+	}
+
+	/**
+	 *
+	 * @param b32data
+	 * @return
+	 */
+	public String base32Decode(String b32data) {
+		Base32 b32 = new Base32();
+		return new String(b32.decode(b32data), StandardCharsets.UTF_8);
+	}
+
+	/**
+	 *
+	 * @param b32data
+	 * @return
+	 */
+	public Number getLengthBase32(String b32data) {
+		Base32 b32 = new Base32();
+		byte[] data = b32.decode(b32data);
+		return data.length;
+	}
+
+	/**
+	 *
+	 * @param b32data
+	 * @return
+	 */
+	public String base32toBase64(String b32data) {
+		//decode base32:
+		Base32 b32 = new  Base32();
+		byte[] data = b32.decode(b32data);
+		//encode base64
+		return Base64.encodeBase64String(data);
+	}
+
+	/**
+	 *
+	 * @param b64data
+	 * @return
+	 */
+	public String base64toBase32(String b64data) {
+		//decode base64
+		byte[] data = Base64.decodeBase64(b64data);
+		//encode base32
+		Base32 b32 = new Base32();
+		return b32.encodeAsString(data);
+	}
+
+	/**
+	 *
+	 * @param hexData
+	 * @return
+	 * @throws DecoderException
+	 */
+	public String hexToBase32(String hexData) throws DecoderException {
+		//decode hex
+		byte[] data = Hex.decodeHex(hexData.toCharArray());
+		//encode base32
+		Base32 b32 = new Base32();
+		return b32.encodeAsString(data);
+	}
+
+	/**
+	 *
+	 * @param b32data
+	 * @return
+	 */
+	public String base32toHex(String b32data) {
+		//decode base32
+		Base32 b32 = new Base32();
+		byte[] data = b32.decode(b32data);
+		//encode hex
+		String hexDataString = Hex.encodeHexString(data);
+		return hexDataString;
+	}
+
 }

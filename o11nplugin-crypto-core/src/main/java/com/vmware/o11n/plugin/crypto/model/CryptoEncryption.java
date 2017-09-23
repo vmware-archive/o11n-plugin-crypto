@@ -12,6 +12,8 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
@@ -29,6 +31,7 @@ description="Provides static methods to encrypt/decrypt data with different ciph
 public class CryptoEncryption {
 
 	public static final String TYPE = "CryptoEncryption";
+	private final Logger log = LoggerFactory.getLogger(CryptoEncryption.class);
 
 	@Autowired
 	private CryptoEncryptionService service;

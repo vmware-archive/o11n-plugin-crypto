@@ -26,6 +26,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import net.oauth.signature.pem.PEMReader;
@@ -33,6 +35,7 @@ import net.oauth.signature.pem.PKCS1EncodedKeySpec;
 
 @Component
 public class CryptoRSAService {
+	private final Logger log = LoggerFactory.getLogger(CryptoRSAService.class);
 
 	private static final String CIPHER_TRANSFORMATION = "RSA/ECB/PKCS1Padding";
 	private static final String SIGNATURE_ALGORITHM = "NONEwithRSA";

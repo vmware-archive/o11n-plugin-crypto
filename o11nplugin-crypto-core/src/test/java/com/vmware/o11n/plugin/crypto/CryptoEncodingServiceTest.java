@@ -20,6 +20,8 @@ public class CryptoEncodingServiceTest {
 	CryptoEncryptionService encryptionService = new CryptoEncryptionService();
 	private final String staticString = "Hello World!!";
 	private final String staticStringB64 = "SGVsbG8gV29ybGQhIQ==";
+	private final String staticB32foobar = "MZXW6YTBOI======";
+	private final String staticB32fooba = "MZXW6YTB";
 
 	@Test
 	public void staticB64EncodeTest() throws UnsupportedEncodingException {
@@ -38,7 +40,7 @@ public class CryptoEncodingServiceTest {
 	public void getLengthBase64Test() {
 		final int aByte = 1;  //just one
 		final int oddLength = 43;  //random odd number
-		final int evenLength = 84;  //random evan number
+		final int evenLength = 84;  //random even number
 
 		String oddB64 = encryptionService.generateRandomBytes(oddLength);
 		String evenB64 = encryptionService.generateRandomBytes(evenLength);
@@ -48,5 +50,17 @@ public class CryptoEncodingServiceTest {
 		assertEquals("even length", evenLength, service.getLengthBase64(evenB64));
 		assertEquals("one byte", aByte, service.getLengthBase64(aByteB64));
 		assertEquals("zero bytes", 0, service.getLengthBase64(""));
+	}
+
+	@Test
+	public void staticB32EncodeTest() {
+		assertEquals("staticBase32foobaEncode", staticB32fooba, service.base32Encode("fooba"));
+		assertEquals("staticBase32foobarEncode", staticB32foobar, service.base32Encode("foobar"));
+	}
+
+	@Test
+	public void staticB32DecodeTest() {
+		assertEquals("staticBase32foobaDecode", "fooba", service.base32Decode(staticB32fooba));
+		assertEquals("staticBase32foobarDecode", "foobar", service.base32Decode(staticB32foobar));
 	}
 }
