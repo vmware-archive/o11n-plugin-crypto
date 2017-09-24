@@ -16,6 +16,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -203,6 +204,39 @@ public class CryptoCertificateService {
 
 
 	/**
+	 *
+	 * @param cert
+	 * @param pubKey
+	 * @return
+	 */
+	public boolean verifyCert(Certificate cert, PublicKey pubKey) {
+		try {
+			cert.verify(pubKey);
+		} catch (Throwable t) {
+			return false;
+		}
+		return true;
+	}
+	/**
+	 *
+	 * @param cert
+	 * @param pubKey
+	 * @return
+	 * @throws IOException
+	 * @throws InvalidKeySpecException
+	 * @throws NoSuchAlgorithmException
+	 */
+	public boolean verifyCert(Certificate cert, String  keyPem) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+		PublicKey key = CryptoUtil.getPublicKey(keyPem);
+		return verifyCert(cert,key);
+	}
+
+	/**
+	 * Returns the certificate chain provided by the HTTPS server.
+	 *
+	 * The first certificate identifies the server.
+	 * The remainder should verify the cert upto a trusted root.
+	 *
 	 *
 	 * @param url
 	 * @return

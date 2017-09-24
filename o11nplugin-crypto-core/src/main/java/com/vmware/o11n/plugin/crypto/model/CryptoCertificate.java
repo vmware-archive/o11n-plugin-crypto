@@ -4,11 +4,14 @@
  */
 package com.vmware.o11n.plugin.crypto.model;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -268,5 +271,18 @@ public class CryptoCertificate implements Serializable, Cloneable {
 		}
 		// passing both these checks, the cert is valid for this date
 		return true;
+	}
+
+	/**
+	 *
+	 * @param pemKey
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 * @throws IOException
+	 */
+	@VsoMethod(vsoReturnType="boolean",description="")
+	public boolean verify( @VsoParam(description="PEM encoded PublicKey of the signing Certificate") String pemKey) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+		return service.verifyCert(this.cert, pemKey);
 	}
 }

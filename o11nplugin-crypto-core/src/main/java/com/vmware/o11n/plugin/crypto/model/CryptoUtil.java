@@ -4,11 +4,21 @@
  */
 package com.vmware.o11n.plugin.crypto.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.security.Key;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
+import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.security.spec.RSAPublicKeySpec;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,10 +27,14 @@ import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.oauth.signature.pem.PEMReader;
+import net.oauth.signature.pem.PKCS1EncodedKeySpec;
+
 public class CryptoUtil {
 	private final static Logger log = LoggerFactory.getLogger(CryptoUtil.class);
 
-	private final static String FIVE_DASH = "-----";
+	private static final String FIVE_DASH = "-----";
+	private static final String KEYFACTORY_ALGORITHM = "RSA";
 
 	/**
 	 * Sometimes the line endings can unintentially get stripped by a user in the vRO client.
@@ -119,5 +133,94 @@ public class CryptoUtil {
 			throw new UnsupportedOperationException("Unknown certificate type.  Only implemented for X509Certificate.");
 		}
 		return CryptoUtil.fixPemString(toReturn);
+	}
+
+	/**
+	 *
+	 * @param pem
+	 * @return
+	 * @throws IOException
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
+	public static Key getKey(String pem) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+		ByteArrayInputStream stream = new ByteArrayInputStream(pem.getBytes());
+		PEMReader reader = new PEMReader(stream);
+		byte[] derBytes = reader.getDerBytes();
+
+		KeySpec keySpec;
+
+		if (PEMReader.PRIVATE_PKCS1_MARKER.equals(reader.getBeginMarker())) {
+			keySpec = (new PKCS1EncodedKeySpec(derBytes)).getKeySpec();
+			return getPrivateKey(keySpec);
+		} else if (PEMReader.PRIVATE_PKCS8_MARKER.equals(reader.getBeginMarker())) {
+			keySpec = new java.security.spec.PKCS8EncodedKeySpec(derBytes);
+			return getPrivateKey(keySpec);
+		} else if (PEMReader.PUBLIC_X509_MARKER.equals(reader.getBeginMarker())) {
+			keySpec = new java.security.spec.X509EncodedKeySpec(derBytes);
+			return getPublicKey(keySpec);
+		} else {
+			throw new IOException("Invalid PEM file: Unknown marker for private or public key " + reader.getBeginMarker());
+		}
+	}
+
+	/**
+	 * Generate a RSA Public Key from a KeySpec
+	 *
+	 * @param keySpec
+	 * @return RSA Public Key
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
+	private static PublicKey getPublicKey(KeySpec keySpec) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		KeyFactory fac = KeyFactory.getInstance(KEYFACTORY_ALGORITHM);
+		return fac.generatePublic(keySpec);
+	}
+
+	/**
+	 * Generate a RSA Private Key from a KeySpec
+	 *
+	 * @param keySpec
+	 * @return RSA Private Key
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
+	private static PrivateKey getPrivateKey(KeySpec keySpec) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		KeyFactory fac = KeyFactory.getInstance(KEYFACTORY_ALGORITHM);
+		return fac.generatePrivate(keySpec);
+	}
+
+	/**
+	 * Given a PEM string that could be either a RSA public or RSA private key
+	 * always return the parsed RSA public key
+	 *
+	 * @param pem encoded public or private key
+	 * @return PublicKey
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 * @throws IOException
+	 */
+	public static RSAPublicKey getPublicKey(String pem) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+		Key key = getKey(pem);
+		RSAPublicKey toReturn;
+		if (key instanceof RSAPublicKey) {
+			toReturn = (RSAPublicKey)key;
+		} else {
+			toReturn = getPublicFromPrivate((RSAPrivateCrtKey) key);
+		}
+		return toReturn;
+	}
+
+	/**
+	 * Compute the RSA Public Key from an RSA Private Key
+	 *
+	 * @param privateKey RSA Private Key
+	 * @return RSA Public Key
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
+	public static RSAPublicKey getPublicFromPrivate(RSAPrivateCrtKey privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		RSAPublicKeySpec spec = new RSAPublicKeySpec(privateKey.getModulus(), privateKey.getPublicExponent());
+		return (RSAPublicKey)getPublicKey(spec);
 	}
 }

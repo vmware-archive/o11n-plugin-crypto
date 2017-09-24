@@ -17,6 +17,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
 import javax.naming.InvalidNameException;
@@ -24,6 +25,7 @@ import javax.naming.InvalidNameException;
 import org.junit.Test;
 
 import com.vmware.o11n.plugin.crypto.model.CryptoCertificateService;
+import com.vmware.o11n.plugin.crypto.model.CryptoUtil;
 
 
 public class CryptoCertificateServiceTest {
@@ -56,22 +58,26 @@ public class CryptoCertificateServiceTest {
 	}
 
 	@Test
-	public void remoteCertVmware() throws KeyManagementException, NoSuchAlgorithmException, IOException, CertificateParsingException, InvalidNameException {
+	public void remoteCertVmware() throws KeyManagementException, NoSuchAlgorithmException, IOException, CertificateParsingException, InvalidNameException, InvalidKeySpecException {
 		URL vmwareUrl = new URL(CryptoTestData.vmwareUrl);
 		List<X509Certificate> certs = service.getCertHttps(vmwareUrl);
 		assertEquals("VMware.com cert count", 2, certs.size());
 		assertTrue("VMware.com cert SAN count greater than 0", 0 < service.getSubjectAlternativeNames(certs.get(0)).size());
 		assertEquals("Intermediary cert should have empty SAN", 0, service.getSubjectAlternativeNames(certs.get(1)).size());
 		assertEquals("VMware.com issued to CN", CryptoTestData.vmwareIssuedTo, service.parseDN(certs.get(0).getSubjectDN().getName()).get("CN"));
+		assertTrue("vmware.com cert signed by intermediary", service.verifyCert(certs.get(0), certs.get(1).getPublicKey()));
+		assertTrue("vmware.com cert signed by intermediary string key", service.verifyCert(certs.get(0), CryptoUtil.pemEncode(certs.get(1).getPublicKey())));
 	}
 
 	@Test
-	public void remoteCertGithub() throws KeyManagementException, NoSuchAlgorithmException, IOException, CertificateParsingException, InvalidNameException {
+	public void remoteCertGithub() throws KeyManagementException, NoSuchAlgorithmException, IOException, CertificateParsingException, InvalidNameException, InvalidKeySpecException {
 		URL githubUrl = new URL(CryptoTestData.githubUrl);
 		List<X509Certificate> certs = service.getCertHttps(githubUrl);
 		assertEquals("github.com cert count", 2, certs.size());
 		assertTrue("github.com cert SAN count greater than 0", 0 < service.getSubjectAlternativeNames(certs.get(0)).size());
 		assertEquals("Intermediary cert should have empty SAN", 0, service.getSubjectAlternativeNames(certs.get(1)).size());
 		assertEquals("github.com issued to CN", CryptoTestData.githubIssuedTo, service.parseDN(certs.get(0).getSubjectDN().getName()).get("CN"));
+		assertTrue("github.com cert signed by intermediary", service.verifyCert(certs.get(0), certs.get(1).getPublicKey()));
+		assertTrue("github.com cert signed by intermediary string key", service.verifyCert(certs.get(0), CryptoUtil.pemEncode(certs.get(1).getPublicKey())));
 	}
 }
