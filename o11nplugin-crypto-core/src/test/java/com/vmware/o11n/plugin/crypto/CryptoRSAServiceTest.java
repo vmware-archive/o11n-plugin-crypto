@@ -17,8 +17,8 @@ import javax.crypto.NoSuchPaddingException;
 
 import org.junit.Test;
 
-import com.vmware.o11n.plugin.crypto.model.CryptoEncryptionService;
-import com.vmware.o11n.plugin.crypto.model.CryptoRSAService;
+import com.vmware.o11n.plugin.crypto.service.CryptoEncryptionService;
+import com.vmware.o11n.plugin.crypto.service.CryptoRSAService;
 
 public class CryptoRSAServiceTest {
 

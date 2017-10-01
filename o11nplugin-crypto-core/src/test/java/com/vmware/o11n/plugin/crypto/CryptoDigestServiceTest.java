@@ -11,8 +11,8 @@ import java.io.UnsupportedEncodingException;
 import org.apache.commons.codec.DecoderException;
 import org.junit.Test;
 
-import com.vmware.o11n.plugin.crypto.model.CryptoDigestService;
-import com.vmware.o11n.plugin.crypto.model.CryptoEncodingService;
+import com.vmware.o11n.plugin.crypto.service.CryptoDigestService;
+import com.vmware.o11n.plugin.crypto.service.CryptoEncodingService;
 
 public class CryptoDigestServiceTest {
 

@@ -4,8 +4,11 @@
  */
 package com.vmware.o11n.plugin.crypto.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vmware.o11n.plugin.crypto.service.CryptoDigestService;
 import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
 import com.vmware.o11n.plugin.sdk.annotation.VsoObject;
 import com.vmware.o11n.plugin.sdk.annotation.VsoParam;
@@ -21,6 +24,7 @@ description="Provides methods to hash data with different digests")
 
 public class CryptoDigest {
 	public static final String TYPE = "CryptoDigest";
+	private final Logger log = LoggerFactory.getLogger(CryptoDigest.class);
 
 	@Autowired
 	private CryptoDigestService service;

@@ -176,6 +176,7 @@ public class CryptoTestData {
 			"-----END CERTIFICATE-----");
 	public static final String vcsa_01aCertSha1Thumb = "83:DB:41:DB:AC:BB:E4:F0:1C:00:07:53:23:17:01:6A:DF:64:82:A1";
 	public static final String vcsa_01aCertSha256Thumb = "0C:A2:8E:86:4D:DD:C4:BC:29:3B:22:E7:15:B3:28:4D:3F:D0:13:E8:F6:4B:33:7C:78:A8:20:F8:14:F3:EC:94";
+	public static final String[] vcsa_01aSAN = new String[]{"dns:vcsa-01a","dns:vcsa-01a.corp.local"};
 	public static final String vcsa_01aPrivateKey = String.join("\n",
 			"-----BEGIN PRIVATE KEY-----",
 			"MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDPdaBIVQmMoRzs",
@@ -215,4 +216,9 @@ public class CryptoTestData {
 			"vkt8/wva1CoVbB1132+yFD72isv6hoZ7/Tfpdk4AjdhuQLrP44KQyaJnbtRC1M5f",
 			"SwIDAQAB",
 			"-----END PUBLIC KEY-----");
+	public static final String vmwareUrl = "https://vmware.com";
+	public static final String vmwareIssuedTo = "*.vmware.com";
+	public static final String githubUrl = "https://github.com";
+	public static final String githubIssuedTo = "github.com";
+
 }

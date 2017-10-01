@@ -18,9 +18,9 @@ import javax.crypto.NoSuchPaddingException;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
 
-import com.vmware.o11n.plugin.crypto.model.CryptoDigestService;
-import com.vmware.o11n.plugin.crypto.model.CryptoEncodingService;
-import com.vmware.o11n.plugin.crypto.model.CryptoEncryptionService;
+import com.vmware.o11n.plugin.crypto.service.CryptoDigestService;
+import com.vmware.o11n.plugin.crypto.service.CryptoEncodingService;
+import com.vmware.o11n.plugin.crypto.service.CryptoEncryptionService;
 
 public class CryptoEncryptionServiceTest {
 
