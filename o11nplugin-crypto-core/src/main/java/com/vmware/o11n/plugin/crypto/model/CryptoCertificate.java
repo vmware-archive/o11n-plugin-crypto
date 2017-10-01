@@ -74,6 +74,93 @@ public class CryptoCertificate implements Serializable, Cloneable {
 	}
 
 
+
+	/**
+	 *
+	 * @return
+	 */
+	@VsoProperty(name="encodedBase64",
+			description="Encoded form of the certificate encoded as a Base64 string.  Hashing this can create a fingerprint")
+	public String getEncodedBase64() {
+		String toReturn = null;
+		try {
+			toReturn = service.getEncodedBase64(this.cert);
+		} catch (CertificateException ce) {
+			log.error(ce.getMessage());
+		} catch (Throwable e) {
+			log.error("Unexpected exception: "+e.getMessage());
+		}
+		return toReturn;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@VsoProperty(name="issuedByDN",description="Distinguished Name the certificate was issued by")
+	public String getIssuedByDN() {
+		return this.cert.getIssuerDN().getName();
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws InvalidNameException
+	 */
+	@VsoProperty(name="issuedByMap",description="issuedByDN parsed into key/value pairs")
+	public Map<String,String> getIssuedByMap() throws InvalidNameException {
+		return service.parseDN(this.getIssuedByDN());
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@VsoProperty(name="issuedToDN",description="Distinguished Name the certificate was issued to")
+	public String getIssuedToDN() {
+		return this.cert.getSubjectDN().getName();
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws InvalidNameException
+	 */
+	@VsoProperty(name="issuedToMap",description="issuedToDN parsed into key/value pairs")
+	public Map<String,String> getIssuedToMap() throws InvalidNameException {
+		return service.parseDN(this.getIssuedToDN());
+	}
+
+
+	/**
+	 *
+	 * @return
+	 */
+	@VsoProperty(name="pemEncoded",
+			description="PEM Encoding of the certificate")
+	public String getPemEncoded() {
+		return this.certString;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@VsoProperty(name="publicKeyPem",
+			description="The RSA Public Key in PEM format found in the certificate")
+	public String getPublicKeyPem() {
+		return service.getPublicKeyPem(this.cert);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@VsoProperty(name="serialNumber",description="Serial Number of the Certificate")
+	public String getSerialNumber() {
+		return service.getSerialNumber(this.cert);
+	}
+
 	/**
 	 *
 	 * @return
@@ -114,45 +201,29 @@ public class CryptoCertificate implements Serializable, Cloneable {
 	 *
 	 * @return
 	 */
-	@VsoProperty(name="encodedBase64",
-			description="Encoded form of the certificate encoded as a Base64 string.  Hashing this can create a fingerprint")
-	public String getEncodedBase64() {
-		String toReturn = null;
-		try {
-			toReturn = service.getEncodedBase64(this.cert);
-		} catch (CertificateException ce) {
-			log.error(ce.getMessage());
-		} catch (Throwable e) {
-			log.error("Unexpected exception: "+e.getMessage());
-		}
-		return toReturn;
-	}
-	/**
-	 *
-	 * @return
-	 */
-	@VsoProperty(name="pemEncoded",
-			description="PEM Encodinf of the certificate")
-	public String getPemEncoded() {
-		return this.certString;
+	@VsoProperty(name="signatureAlgorithm",description="Signature algorithm used by the certificate signer")
+	public String getSignatureAlgorithm() {
+		return this.cert.getSigAlgName();
 	}
 
 	/**
 	 *
+	 *
 	 * @return
 	 */
-	@VsoProperty(name="publicKeyPem",
-			description="The RSA Public Key in PEM format found in the certificate")
-	public String getPublicKeyPem() {
-		return service.getPublicKeyPem(this.cert);
+	@VsoProperty(name="signatureBase64",description="Base64 encoded signature of the certificate")
+	public String getSignatureBase64 () {
+		byte[] sig = this.cert.getSignature();
+		return Base64.encodeBase64String(sig);
 	}
+
 
 	/**
 	 *
 	 * @return
 	 */
 	@VsoProperty(name="subjectAlternativeNames",
-			description="A list of DNS subject alternative names found in the certificate")
+			description="A list of subject alternative names found in the certificate. Each will have a colon delimited prefix for the type of SAN found.  ex: \"dns:\"")
 	public String[] getSubjectAlternativeNames() {
 		try {
 			List<String> san = service.getSubjectAlternativeNames(this.cert);
@@ -163,72 +234,6 @@ public class CryptoCertificate implements Serializable, Cloneable {
 			log.error(e.toString());
 		}
 		return EMPTY_STRING_ARRAY;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@VsoProperty(name="signatureAlgorithm")
-	public String getSignatureAlgorithm() {
-		return this.cert.getSigAlgName();
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@VsoProperty(name="signatureBase64")
-	public String getSignatureBase64 () {
-		byte[] sig = this.cert.getSignature();
-		return Base64.encodeBase64String(sig);
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@VsoProperty(name="serialNumber")
-	public String getSerialNumber() {
-		return service.getSerialNumber(this.cert);
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@VsoProperty(name="issuedToDN")
-	public String getIssuedToDN() {
-		return this.cert.getSubjectDN().getName();
-	}
-
-	/**
-	 *
-	 * @return
-	 * @throws InvalidNameException
-	 */
-	@VsoProperty(name="issuedToMap")
-	public Map<String,String> getIssuedToMap() throws InvalidNameException {
-		return service.parseDN(this.getIssuedToDN());
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	@VsoProperty(name="issuedByDN")
-	public String getIssuedByDN() {
-		return this.cert.getIssuerDN().getName();
-	}
-
-	/**
-	 *
-	 * @return
-	 * @throws InvalidNameException
-	 */
-	@VsoProperty(name="issuedByMap")
-	public Map<String,String> getIssuedByMap() throws InvalidNameException {
-		return service.parseDN(this.getIssuedByDN());
 	}
 
 	/**
@@ -282,7 +287,7 @@ public class CryptoCertificate implements Serializable, Cloneable {
 	 * @throws InvalidKeySpecException
 	 * @throws IOException
 	 */
-	@VsoMethod(vsoReturnType="boolean",description="")
+	@VsoMethod(vsoReturnType="boolean",description="Verifies the Certificate was signed by a signing certificates private key")
 	public boolean verify( @VsoParam(description="PEM encoded PublicKey of the signing Certificate") String pemKey) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
 		return service.verifyCert(this.cert, pemKey);
 	}

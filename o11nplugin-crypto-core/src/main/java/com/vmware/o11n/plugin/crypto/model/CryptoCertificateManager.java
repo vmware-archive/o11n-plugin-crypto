@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.vmware.o11n.plugin.crypto.service.CryptoCertificateService;
 import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
 import com.vmware.o11n.plugin.sdk.annotation.VsoObject;
+import com.vmware.o11n.plugin.sdk.annotation.VsoParam;
 import com.vmware.o11n.plugin.sdk.spring.AbstractSpringPluginFactory;
 
 import ch.dunes.vso.sdk.api.IPluginFactory;
@@ -41,13 +42,15 @@ public class CryptoCertificateManager {
 	}
 
 	@VsoMethod(description="parses a PEM encoded X.509 Certificate")
-	public CryptoCertificate parseCertificatePem(String pemCertString) throws CertificateException {
+	public CryptoCertificate parseCertificatePem(
+			@VsoParam(description="PEM encoded Certificate")String pemCertString) throws CertificateException {
 		X509Certificate cert = service.parseCertificate(pemCertString);
 		return new CryptoCertificate(cert);
 	}
 
 	@VsoMethod(description="Returns array of certificates presented by an https server")
-	public CryptoCertificate[] getHttpsCertificate(String urlString) throws KeyManagementException, NoSuchAlgorithmException, IOException, CertificateEncodingException {
+	public CryptoCertificate[] getHttpsCertificate(
+			@VsoParam(description="HTTPS URL to get certificate chain of") String urlString) throws KeyManagementException, NoSuchAlgorithmException, IOException, CertificateEncodingException {
 		ArrayList<CryptoCertificate> toReturn = new ArrayList<>();
 		URL url = new URL(urlString);
 		List<X509Certificate> certs = service.getCertHttps(url);
