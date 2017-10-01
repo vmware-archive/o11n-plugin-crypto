@@ -24,8 +24,8 @@ import javax.naming.InvalidNameException;
 
 import org.junit.Test;
 
-import com.vmware.o11n.plugin.crypto.model.CryptoCertificateService;
 import com.vmware.o11n.plugin.crypto.model.CryptoUtil;
+import com.vmware.o11n.plugin.crypto.service.CryptoCertificateService;
 
 
 public class CryptoCertificateServiceTest {

@@ -2,7 +2,7 @@
  * Copyright (c) 2017 VMware, Inc. All Rights Reserved.
  * SPDX-License-Identifier: BSD-2-Clause
  */
-package com.vmware.o11n.plugin.crypto.model;
+package com.vmware.o11n.plugin.crypto.service;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -25,6 +25,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.vmware.o11n.plugin.crypto.model.CryptoUtil;
 
 @Component
 public class CryptoRSAService {

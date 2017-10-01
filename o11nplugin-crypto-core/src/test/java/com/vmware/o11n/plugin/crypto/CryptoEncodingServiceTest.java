@@ -11,8 +11,8 @@ import java.io.UnsupportedEncodingException;
 import org.apache.commons.codec.DecoderException;
 import org.junit.Test;
 
-import com.vmware.o11n.plugin.crypto.model.CryptoEncodingService;
-import com.vmware.o11n.plugin.crypto.model.CryptoEncryptionService;
+import com.vmware.o11n.plugin.crypto.service.CryptoEncodingService;
+import com.vmware.o11n.plugin.crypto.service.CryptoEncryptionService;
 
 public class CryptoEncodingServiceTest {
 

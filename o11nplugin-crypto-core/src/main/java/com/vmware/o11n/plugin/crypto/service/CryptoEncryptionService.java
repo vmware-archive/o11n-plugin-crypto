@@ -2,7 +2,7 @@
  * Copyright (c) 2017 VMware, Inc. All Rights Reserved.
  * SPDX-License-Identifier: BSD-2-Clause
  */
-package com.vmware.o11n.plugin.crypto.model;
+package com.vmware.o11n.plugin.crypto.service;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
