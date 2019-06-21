@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="mimeToBase64" result-type="string" api-version="6.0.0" id="88407560-4a98-4a8b-afc4-36f39996da6b" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Extracts data from a MimeAttachment object as Base64 encoded string.]]></description>
+  <param n="mime" t="MimeAttachment"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[return CryptoEncoding.mimeToBase64(mime);]]></script>
+</dunes-script-module>

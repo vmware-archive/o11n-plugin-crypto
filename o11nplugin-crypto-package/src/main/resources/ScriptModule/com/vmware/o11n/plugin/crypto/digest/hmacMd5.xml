@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="hmacMd5" result-type="string" api-version="6.0.0" id="5da93f01-414d-42ab-b71a-5d3cb2efc82b" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[returns: Base64 encoded MD5 based Hashed Message Authentication Code (HMAC) ]]></description>
+  <param n="keyB64" t="string"><![CDATA[Base64 encoded secret key]]></param>
+  <param n="dataB64" t="string"><![CDATA[Base64 encoded data to sign]]></param>
+  <script encoded="false"><![CDATA[return CryptoDigest.hmacMd5(keyB64, dataB64);]]></script>
+</dunes-script-module>

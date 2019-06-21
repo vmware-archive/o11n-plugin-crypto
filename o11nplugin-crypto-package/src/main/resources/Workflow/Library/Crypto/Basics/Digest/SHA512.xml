@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="25ce0012-38e2-491e-9b5f-d3969d1cba8f" version="0.0.1" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[SHA512]]></display-name>
+  <position y="50.0" x="100.0"></position>
+  <input>
+    <param name="data" type="string">
+      <description><![CDATA[Plain string data to hash]]></description>
+    </param>
+  </input>
+  <output>
+    <param name="hashedB64" type="string"></param>
+  </output>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="384.5"></position>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item0" type="task" script-module="com.vmware.o11n.plugin.crypto.digest/sha512">
+    <display-name><![CDATA[sha512]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.o11n.plugin.crypto.digest").sha512(data) ;]]></script>
+    <in-binding>
+      <bind name="data" type="string" export-name="data">
+        <description><![CDATA[Plain string data to hash]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="actionResult" type="string" export-name="hashedB64"></bind>
+    </out-binding>
+    <description><![CDATA[Returns a Base64 encoded 512 bit SHA-512 hash from plain string.]]></description>
+    <position y="55.40909090909091" x="204.5"></position>
+  </workflow-item>
+  <presentation>
+    <p-param name="data">
+      <desc><![CDATA[Plain string data to hash]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

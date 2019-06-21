@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="binaryConcatBase64" result-type="string" api-version="6.0.0" id="f6b3e8b0-65d6-4589-85d8-eefdee687d85" version="0.0.0" allowed-operations="vef">
+  <param n="b64data1" t="string"><![CDATA[Base64 Data]]></param>
+  <param n="b64data2" t="string"><![CDATA[Base64 data to append]]></param>
+  <script encoded="false"><![CDATA[return CryptoEncoding.binaryConcatBase64(b64data1, b64data2);]]></script>
+</dunes-script-module>

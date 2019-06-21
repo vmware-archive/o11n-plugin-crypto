@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">com.vmware.o11n.plugin.crypto.digest</entry>
+<entry key="name">md5</entry>
+<entry key="type">ScriptModule</entry>
+<entry key="id">14dac3a8-74a2-4146-82d9-25f0f1766c36</entry>
+</properties>

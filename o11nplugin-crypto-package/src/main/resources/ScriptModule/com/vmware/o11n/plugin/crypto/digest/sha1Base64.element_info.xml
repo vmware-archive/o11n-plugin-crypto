@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">com.vmware.o11n.plugin.crypto.digest</entry>
+<entry key="name">sha1Base64</entry>
+<entry key="type">ScriptModule</entry>
+<entry key="id">5ae83705-6d95-4ef5-beb0-ef10c6bbf732</entry>
+</properties>

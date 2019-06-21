@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">Library.Crypto.Basics.Digest</entry>
+<entry key="name">SHA384 Base64</entry>
+<entry key="type">Workflow</entry>
+<entry key="id">167332cc-0a0a-4322-a5c0-a69ee1a1331c</entry>
+</properties>

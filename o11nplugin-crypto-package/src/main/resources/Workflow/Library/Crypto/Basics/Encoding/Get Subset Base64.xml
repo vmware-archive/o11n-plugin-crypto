@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="c1387894-d58b-49e1-9375-080c91b19233" version="0.0.1" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Get Subset Base64]]></display-name>
+  <position y="50.0" x="100.0"></position>
+  <input>
+    <param name="b64data" type="string">
+      <description><![CDATA[Base64 encoded data]]></description>
+    </param>
+    <param name="start" type="number">
+      <description><![CDATA[Starting byte index to get subset of data (inclusive). Starts at 0]]></description>
+    </param>
+    <param name="length" type="number">
+      <description><![CDATA[Number of bytes to return. Must be 1 or greater.]]></description>
+    </param>
+  </input>
+  <output>
+    <param name="subsetBase64" type="string">
+      <description><![CDATA[Subset of bytes Base64 encoded]]></description>
+    </param>
+  </output>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="384.5"></position>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item0" type="task" script-module="com.vmware.o11n.plugin.crypto.encoding/getSubsetBase64">
+    <display-name><![CDATA[getSubsetBase64]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.o11n.plugin.crypto.encoding").getSubsetBase64(b64data,start,length) ;]]></script>
+    <in-binding>
+      <bind name="b64data" type="string" export-name="b64data">
+        <description><![CDATA[Base64 encoded data]]></description>
+      </bind>
+      <bind name="start" type="number" export-name="start">
+        <description><![CDATA[Starting byte index to get subset of data (inclusive). Starts at 0]]></description>
+      </bind>
+      <bind name="length" type="number" export-name="length">
+        <description><![CDATA[Number of bytes to return. Must be 1 or greater.]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="actionResult" type="string" export-name="subsetBase64"></bind>
+    </out-binding>
+    <position y="55.40909090909091" x="204.5"></position>
+  </workflow-item>
+  <presentation>
+    <p-param name="b64data">
+      <desc><![CDATA[Base64 encoded data]]></desc>
+    </p-param>
+    <p-param name="start">
+      <desc><![CDATA[Starting byte index to get subset of data (inclusive). Starts at 0]]></desc>
+    </p-param>
+    <p-param name="length">
+      <desc><![CDATA[Number of bytes to return. Must be 1 or greater.]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

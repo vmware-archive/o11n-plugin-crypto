@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="base64Encode" result-type="string" api-version="6.0.0" id="e89ee795-d3b2-483f-acbf-afcf5745456f" version="0.0.0" allowed-operations="vef">
+  <param n="data" t="string"><![CDATA[String data to encode]]></param>
+  <script encoded="false"><![CDATA[return CryptoEncoding.base64Encode(data);]]></script>
+</dunes-script-module>
