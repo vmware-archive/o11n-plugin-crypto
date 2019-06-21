@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="aesDecrypt" result-type="string" api-version="6.0.0" id="853ffd39-8db0-43ec-9043-4bc4f91262c8" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[AES Decryption. Returns original data Base64 encoded.]]></description>
+  <param n="encryptedB64" t="string"><![CDATA[Data to decrypt Base64 encoded.]]></param>
+  <param n="secretB64" t="string"><![CDATA[Encryption secret Base64 encoded. For AES 128 this should be 128 bits (16 bytes) long. For AES256 this should be 256 bits (32 bytes) long.]]></param>
+  <param n="ivB64" t="string"><![CDATA[Initialization vector Base64 encoded. 16 bytes long.]]></param>
+  <script encoded="false"><![CDATA[return CryptoEncryption.aesDecrypt(encryptedB64, secretB64, ivB64);]]></script>
+</dunes-script-module>

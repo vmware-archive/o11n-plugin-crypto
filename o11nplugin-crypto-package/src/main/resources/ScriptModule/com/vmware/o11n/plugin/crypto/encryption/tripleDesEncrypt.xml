@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="tripleDesEncrypt" result-type="string" api-version="6.0.0" id="d25a4fe6-92f0-45e0-8b30-3b05d511ffb6" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[3DES (EDE) Encryption. Returns encrypted data Base64 encoded.]]></description>
+  <param n="dataB64" t="string"><![CDATA[Data to encrypt Base64 encoded.]]></param>
+  <param n="secretB64" t="string"><![CDATA[ncryption secret Base64 encoded. 192 bits (24 bytes) long. If longer, only the first 24 bytes will be used.]]></param>
+  <param n="ivB64" t="string"><![CDATA[Initialization vector Base64 encoded. 8 bytes long.]]></param>
+  <script encoded="false"><![CDATA[return CryptoEncryption.tripleDesEncrypt(dataB64, secretB64, ivB64);]]></script>
+</dunes-script-module>

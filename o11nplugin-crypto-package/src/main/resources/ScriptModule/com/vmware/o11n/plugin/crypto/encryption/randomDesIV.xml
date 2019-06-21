@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="randomDesIV" result-type="string" api-version="6.0.0" id="5dd07602-dedb-425d-8c5a-b08d217e23c1" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Returns 8 random bytes Base64 encoded suitable for an DES initialization vector.
+
+A new self-seeding, non-blocking, Java SecureRandom number generator is created per method call]]></description>
+  <script encoded="false"><![CDATA[return CryptoEncryption.generateRandomBytes(8);]]></script>
+</dunes-script-module>

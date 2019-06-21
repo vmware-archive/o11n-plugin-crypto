@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="randomAesIV" result-type="string" api-version="6.0.0" id="184ff8bb-703c-4ad5-b7b0-b0004609ee72" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Returns 16 random bytes Base64 encoded suitable for an AES initialization vector.
+
+A new self-seeding, non-blocking, Java SecureRandom number generator is created per method call.]]></description>
+  <script encoded="false"><![CDATA[return CryptoEncryption.generateRandomIv();]]></script>
+</dunes-script-module>
