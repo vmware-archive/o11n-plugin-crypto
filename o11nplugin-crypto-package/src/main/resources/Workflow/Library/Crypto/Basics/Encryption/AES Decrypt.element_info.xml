@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">Library.Crypto.Basics.Encryption</entry>
+<entry key="name">AES Decrypt</entry>
+<entry key="type">Workflow</entry>
+<entry key="id">3a1d3a09-3a05-408e-b75a-bd90ea67c3dd</entry>
+</properties>
