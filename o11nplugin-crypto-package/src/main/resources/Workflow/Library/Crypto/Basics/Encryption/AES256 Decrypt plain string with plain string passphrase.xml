@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item2" object-name="workflow:name=generic" id="3a1d3a09-3a05-408e-b75a-bd90ea67c3dd" version="0.0.2" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
-  <display-name><![CDATA[AES Decrypt]]></display-name>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item3" object-name="workflow:name=generic" id="e0bde72c-3d2d-44fe-ab45-09e7bc15ce4a" version="0.0.7" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[AES256 Decrypt plain string with plain string passphrase]]></display-name>
   <position y="50.0" x="100.0"></position>
   <input>
     <param name="encryptedB64" type="string">
       <description><![CDATA[Encrypted data Base64 encoded]]></description>
     </param>
-    <param name="secretB64" type="string">
-      <description><![CDATA[Encryption secret Base64 encoded. For AES128 this should be 128 bits (16 bytes) long. For AES256 this should be 256 bits (32 bytes) long.]]></description>
-    </param>
-    <param name="ivB64" type="string">
-      <description><![CDATA[Initialization vector Base64 encoded. 16 bytes long.]]></description>
+    <param name="passphrase" type="SecureString">
+      <description><![CDATA[Plain string passphrase.  Will be hashed with SHA256 to assure 256bit length for secret]]></description>
     </param>
     <param name="prependIV" type="boolean">
       <description><![CDATA[True if the initialization vector is prepended to encrypted data.  If so, ivB64 input will be ignored.]]></description>
+    </param>
+    <param name="ivB64" type="string">
+      <description><![CDATA[Initialization vector Base64 encoded. 16 bytes long.]]></description>
     </param>
   </input>
   <output>
     <param name="dataB64" type="string">
       <description><![CDATA[Decrypted data  Base64 encoded.]]></description>
+    </param>
+    <param name="dataString" type="string">
+      <description><![CDATA[Decrypted data]]></description>
     </param>
   </output>
   <attrib name="encryptedAttr" type="string" read-only="false">
@@ -27,8 +30,15 @@
   <attrib name="ivAttr" type="string" read-only="false">
     <value encoded="n"><![CDATA[]]></value>
   </attrib>
+  <attrib name="secretB64" type="string" read-only="false">
+    <value encoded="n"><![CDATA[]]></value>
+    <description><![CDATA[Encryption secret Base64 encoded. For AES128 this should be 128 bits (16 bytes) long. For AES256 this should be 256 bits (32 bytes) long.]]></description>
+  </attrib>
+  <attrib name="dataB64Attr" type="string" read-only="false">
+    <value encoded="n"><![CDATA[]]></value>
+  </attrib>
   <workflow-item name="item0" type="end" end-mode="0">
-    <position y="109.04545454545453" x="544.5"></position>
+    <position y="172.68181818181816" x="804.5"></position>
   </workflow-item>
   <workflow-item name="item2" out-name="item4" type="condition" alt-out-name="item5" comparator="0">
     <display-name><![CDATA[Prepended IV?]]></display-name>
@@ -38,7 +48,7 @@ return (prependIV == true) ;]]></script>
       <bind name="prependIV" type="boolean" export-name="prependIV"></bind>
     </in-binding>
     <condition name="prependIV" type="boolean" comparator="0" label="null">false</condition>
-    <position y="45.40909090909091" x="204.5"></position>
+    <position y="45.40909090909091" x="344.5"></position>
   </workflow-item>
   <workflow-item name="item4" out-name="item1" type="task">
     <display-name><![CDATA[Extract IV]]></display-name>
@@ -56,7 +66,7 @@ encryptedAttr = CryptoEncoding.getSubsetBase64(encryptedB64, 16, inputLength - 1
       <bind name="ivAttr" type="string" export-name="ivAttr"></bind>
     </out-binding>
     <description><![CDATA[Extracts the prepended IV that was prepended on an encrypted string]]></description>
-    <position y="55.40909090909091" x="344.5"></position>
+    <position y="55.40909090909091" x="484.5"></position>
   </workflow-item>
   <workflow-item name="item5" out-name="item1" type="task">
     <display-name><![CDATA[Set Attr]]></display-name>
@@ -70,9 +80,9 @@ ivAttr = ivB64;]]></script>
       <bind name="encryptedAttr" type="string" export-name="encryptedAttr"></bind>
       <bind name="ivAttr" type="string" export-name="ivAttr"></bind>
     </out-binding>
-    <position y="119.04545454545453" x="205.0"></position>
+    <position y="119.04545454545453" x="344.5"></position>
   </workflow-item>
-  <workflow-item name="item1" out-name="item0" type="task" script-module="com.vmware.o11n.plugin.crypto.encryption/aesDecrypt">
+  <workflow-item name="item1" out-name="item6" type="task" script-module="com.vmware.o11n.plugin.crypto.encryption/aesDecrypt">
     <display-name><![CDATA[aesDecrypt]]></display-name>
     <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
 actionResult = System.getModule("com.vmware.o11n.plugin.crypto.encryption").aesDecrypt(encryptedB64,secretB64,ivB64) ;]]></script>
@@ -88,22 +98,60 @@ actionResult = System.getModule("com.vmware.o11n.plugin.crypto.encryption").aesD
       </bind>
     </in-binding>
     <out-binding>
-      <bind name="actionResult" type="string" export-name="dataB64"></bind>
+      <bind name="actionResult" type="string" export-name="dataB64Attr"></bind>
     </out-binding>
     <description><![CDATA[AES Decryption. Returns original data Base64 encoded.]]></description>
-    <position y="119.04545454545453" x="344.5"></position>
+    <position y="119.04545454545453" x="484.5"></position>
+  </workflow-item>
+  <workflow-item name="item3" out-name="item2" type="task" script-module="com.vmware.o11n.plugin.crypto.digest/sha256">
+    <display-name><![CDATA[sha256]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.o11n.plugin.crypto.digest").sha256(data) ;]]></script>
+    <in-binding>
+      <bind name="data" type="SecureString" export-name="passphrase">
+        <description><![CDATA[Plain string data to hash]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="actionResult" type="string" export-name="secretB64"></bind>
+    </out-binding>
+    <description><![CDATA[Returns a Base64 encoded 256 bit SHA-256 hash from plain string.]]></description>
+    <position y="55.40909090909091" x="204.5"></position>
+  </workflow-item>
+  <workflow-item name="item6" out-name="item7" type="task" script-module="com.vmware.o11n.plugin.crypto.encoding/base64Decode">
+    <display-name><![CDATA[base64Decode]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.o11n.plugin.crypto.encoding").base64Decode(b64data) ;]]></script>
+    <in-binding>
+      <bind name="b64data" type="string" export-name="dataB64Attr"></bind>
+    </in-binding>
+    <out-binding>
+      <bind name="actionResult" type="string" export-name="dataString"></bind>
+    </out-binding>
+    <position y="119.04545454545453" x="624.5"></position>
+  </workflow-item>
+  <workflow-item name="item7" out-name="item0" type="task">
+    <display-name><![CDATA[Set Output]]></display-name>
+    <script encoded="false"><![CDATA[dataB64 = dataB64Attr;]]></script>
+    <in-binding>
+      <bind name="dataB64Attr" type="string" export-name="dataB64Attr"></bind>
+    </in-binding>
+    <out-binding>
+      <bind name="dataB64" type="string" export-name="dataB64"></bind>
+    </out-binding>
+    <position y="119.04545454545453" x="764.5"></position>
   </workflow-item>
   <presentation>
     <p-param name="encryptedB64">
       <desc><![CDATA[Encrypted data Base64 encoded]]></desc>
       <p-qual kind="static" name="mandatory" type="boolean"><![CDATA[true]]></p-qual>
     </p-param>
-    <p-param name="secretB64">
-      <desc><![CDATA[Encryption secret Base64 encoded. For AES128 this should be 128 bits (16 bytes) long. For AES256 this should be 256 bits (32 bytes) long.]]></desc>
+    <p-param name="passphrase">
+      <desc><![CDATA[passphrase]]></desc>
       <p-qual kind="static" name="mandatory" type="boolean"><![CDATA[true]]></p-qual>
     </p-param>
     <p-param name="prependIV">
-      <desc><![CDATA[True if the initialization vector will be prepended to the encrypted data. ]]></desc>
+      <desc><![CDATA[True if the initialization vector was prepended to the encrypted data. ]]></desc>
       <p-qual kind="static" name="defaultValue" type="boolean"><![CDATA[__NULL__]]></p-qual>
     </p-param>
     <p-param name="ivB64">
