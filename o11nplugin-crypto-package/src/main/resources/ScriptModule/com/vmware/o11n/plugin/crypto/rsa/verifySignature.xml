@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="verifySignature" result-type="boolean" api-version="6.0.0" id="a3ff13b2-2a50-414b-90d2-8db6cd4e65fc" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Verifies a RSA signature. Returns true on successful validation.]]></description>
+  <param n="key" t="string"><![CDATA[PEM encoded Public or Private Key]]></param>
+  <param n="dataB64" t="string"><![CDATA[Base64 encoded message that was signed]]></param>
+  <param n="signatureB64" t="string"><![CDATA[Base64 encoded RSA signature to verify]]></param>
+  <script encoded="false"><![CDATA[return CryptoRSA.verifySignature(key, dataB64, signatureB64);]]></script>
+</dunes-script-module>

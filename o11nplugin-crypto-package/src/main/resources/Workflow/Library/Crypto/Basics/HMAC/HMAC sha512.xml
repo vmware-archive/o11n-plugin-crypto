@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="7d02321a-de22-43e6-ae64-adaf634a025b" version="0.0.1" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[HMAC sha512]]></display-name>
+  <position y="50.0" x="100.0"></position>
+  <input>
+    <param name="keyB64" type="string">
+      <description><![CDATA[Base64 encoded secret key]]></description>
+    </param>
+    <param name="dataB64" type="string">
+      <description><![CDATA[Base64 encoded data to sign]]></description>
+    </param>
+  </input>
+  <output>
+    <param name="hmacBase64" type="string">
+      <description><![CDATA[SHA512 based Hashed Message Authentication Code (HMAC) Base64 encoded]]></description>
+    </param>
+  </output>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="384.5"></position>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item0" type="task" script-module="com.vmware.o11n.plugin.crypto.digest/hmacSha512">
+    <display-name><![CDATA[hmacSha512]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.o11n.plugin.crypto.digest").hmacSha512(keyB64,dataB64) ;]]></script>
+    <in-binding>
+      <bind name="keyB64" type="string" export-name="keyB64">
+        <description><![CDATA[Base64 encoded secret key]]></description>
+      </bind>
+      <bind name="dataB64" type="string" export-name="dataB64">
+        <description><![CDATA[Base64 encoded data to sign]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="actionResult" type="string" export-name="hmacBase64"></bind>
+    </out-binding>
+    <description><![CDATA[returns: Base64 encoded SHA-512 based Hashed Message Authentication Code (HMAC) ]]></description>
+    <position y="55.40909090909091" x="204.5"></position>
+  </workflow-item>
+  <presentation>
+    <p-param name="keyB64">
+      <desc><![CDATA[Base64 encoded secret key]]></desc>
+      <p-qual kind="static" name="mandatory" type="boolean"><![CDATA[true]]></p-qual>
+    </p-param>
+    <p-param name="dataB64">
+      <desc><![CDATA[Base64 encoded data to sign]]></desc>
+      <p-qual kind="static" name="mandatory" type="boolean"><![CDATA[true]]></p-qual>
+    </p-param>
+  </presentation>
+</workflow>

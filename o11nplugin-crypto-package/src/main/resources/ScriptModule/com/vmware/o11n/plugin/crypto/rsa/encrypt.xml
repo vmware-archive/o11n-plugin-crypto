@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="encrypt" result-type="string" api-version="6.0.0" id="c6962a13-6e44-479b-92b1-00861f32cc89" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Asymmetric RSA encryption. Result is Base64 encoded.]]></description>
+  <param n="key" t="string"><![CDATA[PEM encoded Public or Private Key]]></param>
+  <param n="dataB64" t="string"><![CDATA[Base64 encoded data. Supports binary data.]]></param>
+  <script encoded="false"><![CDATA[return CryptoRSA.encrypt(key, dataB64);]]></script>
+</dunes-script-module>

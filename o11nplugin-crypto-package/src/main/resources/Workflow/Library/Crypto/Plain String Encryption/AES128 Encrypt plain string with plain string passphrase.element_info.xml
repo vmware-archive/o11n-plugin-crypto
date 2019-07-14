@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">Library.Crypto.Plain String Encryption</entry>
+<entry key="name">AES128 Encrypt plain string with plain string passphrase</entry>
+<entry key="type">Workflow</entry>
+<entry key="id">89ce54de-10d2-46bd-a422-6880730f91ee</entry>
+</properties>

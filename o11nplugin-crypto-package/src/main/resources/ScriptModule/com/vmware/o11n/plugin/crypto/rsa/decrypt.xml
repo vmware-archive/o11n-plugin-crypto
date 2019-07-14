@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="decrypt" result-type="string" api-version="6.0.0" id="e3f44293-36fe-405b-be13-4050a4fed82c" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Asymmetric RSA decryption. Result is Base64 encoded to support binary data. If you are expecting clear text from the decryption, use CryptoEncoding.base64Decode on the result.]]></description>
+  <param n="key" t="string"><![CDATA[PEM encoded Private Key]]></param>
+  <param n="encryptedB64" t="string"><![CDATA[Base64 encoded encrypted data]]></param>
+  <script encoded="false"><![CDATA[return CryptoRSA.decrypt(key, encryptedB64);]]></script>
+</dunes-script-module>
