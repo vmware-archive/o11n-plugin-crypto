@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">Library.Crypto.Basics.RSA</entry>
+<entry key="name">Create RSA Signature</entry>
+<entry key="type">Workflow</entry>
+<entry key="id">66e310ad-aac1-4e99-988f-384cdbe315b4</entry>
+</properties>
