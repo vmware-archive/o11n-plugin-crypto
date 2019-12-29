@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="base64toMime" result-type="MimeAttachment" api-version="6.0.0" id="3ef470c3-0aba-4044-aa6f-2ecb19fcbf5b" version="0.0.0" allowed-operations="vef">
+  <param n="b64data" t="string"><![CDATA[Base64 encoded data.]]></param>
+  <param n="mimeType" t="string"><![CDATA[Mime type of the data. Ex: text/plain, application/xml, application/pdf]]></param>
+  <param n="fileName" t="string"><![CDATA[Filename of MimeAttachment if it were written to a filesystem]]></param>
+  <script encoded="false"><![CDATA[return CryptoEncoding.base64ToMime(b64data, mimeType, fileName);]]></script>
+</dunes-script-module>

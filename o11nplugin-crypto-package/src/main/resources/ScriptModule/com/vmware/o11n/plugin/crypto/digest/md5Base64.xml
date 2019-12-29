@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="md5Base64" result-type="string" api-version="6.0.0" id="be7644f7-7cad-4741-9fb4-fb0c0f524d71" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Returns a Base64 encoded 128 bit MD5 hash from Base64 encoded data. Compatible with non-string data.]]></description>
+  <param n="dataB64" t="string"><![CDATA[Base64 encoded data to hash]]></param>
+  <script encoded="false"><![CDATA[return CryptoDigest.md5Base64(dataB64);]]></script>
+</dunes-script-module>

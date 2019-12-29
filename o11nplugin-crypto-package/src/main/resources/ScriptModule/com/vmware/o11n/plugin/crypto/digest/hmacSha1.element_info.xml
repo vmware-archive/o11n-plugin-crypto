@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">com.vmware.o11n.plugin.crypto.digest</entry>
+<entry key="name">hmacSha1</entry>
+<entry key="type">ScriptModule</entry>
+<entry key="id">1c93a039-3a5d-4f11-8458-dc6202e1d61e</entry>
+</properties>

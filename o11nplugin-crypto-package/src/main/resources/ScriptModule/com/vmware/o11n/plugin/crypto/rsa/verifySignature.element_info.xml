@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">com.vmware.o11n.plugin.crypto.rsa</entry>
+<entry key="name">verifySignature</entry>
+<entry key="type">ScriptModule</entry>
+<entry key="id">a3ff13b2-2a50-414b-90d2-8db6cd4e65fc</entry>
+</properties>

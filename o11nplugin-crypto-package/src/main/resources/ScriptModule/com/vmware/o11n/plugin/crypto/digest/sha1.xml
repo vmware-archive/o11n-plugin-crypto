@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="sha1" result-type="string" api-version="6.0.0" id="111b3b6e-07d7-493d-94d5-da06dd2b0dc7" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Returns a Base64 encoded 160 bit SHA-1 hash from plain string.]]></description>
+  <param n="data" t="string"><![CDATA[Plain string data to hash]]></param>
+  <script encoded="false"><![CDATA[return CryptoDigest.sha1(data);]]></script>
+</dunes-script-module>

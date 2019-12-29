@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">Library.Crypto.Basics.Encoding</entry>
+<entry key="name">Get Subset Base64</entry>
+<entry key="type">Workflow</entry>
+<entry key="id">c1387894-d58b-49e1-9375-080c91b19233</entry>
+</properties>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="getSubsetBase64" result-type="string" api-version="6.0.0" id="af717031-db06-4be8-b6cb-41d89a673173" version="0.0.0" allowed-operations="vef">
+  <param n="b64data" t="string"><![CDATA[Base64 encoded data]]></param>
+  <param n="start" t="number"><![CDATA[Starting byte index to get subset of data (inclusive). Starts at 0]]></param>
+  <param n="length" t="number"><![CDATA[Number of bytes to return. Must be 1 or greater.]]></param>
+  <script encoded="false"><![CDATA[CryptoEncoding.getSubsetBase64(b64data, start, length);]]></script>
+</dunes-script-module>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">Library.Crypto.Basics.RSA</entry>
+<entry key="name">RSA Decrypt</entry>
+<entry key="type">Workflow</entry>
+<entry key="id">d123c9eb-899b-4d0d-9d50-f55a1af9d14c</entry>
+</properties>

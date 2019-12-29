@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">com.vmware.o11n.plugin.crypto.encoding</entry>
+<entry key="name">base64Encode</entry>
+<entry key="type">ScriptModule</entry>
+<entry key="id">e89ee795-d3b2-483f-acbf-afcf5745456f</entry>
+</properties>

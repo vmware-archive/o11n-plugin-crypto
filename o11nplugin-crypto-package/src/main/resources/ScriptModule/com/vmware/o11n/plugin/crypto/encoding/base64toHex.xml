@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="base64toHex" result-type="string" api-version="6.0.0" id="a3080abb-98eb-415a-b15e-0d78cd548f89" version="0.0.0" allowed-operations="vef">
+  <param n="b64data" t="string"><![CDATA[Base64 data to encode as Hex]]></param>
+  <script encoded="false"><![CDATA[return CryptoEncoding.base64toHex(b64data);]]></script>
+</dunes-script-module>

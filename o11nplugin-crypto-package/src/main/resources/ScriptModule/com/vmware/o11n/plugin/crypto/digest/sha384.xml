@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="sha384" result-type="string" api-version="6.0.0" id="2f1a448d-f33a-4aa1-afdb-07f701e9e368" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[Returns a Base64 encoded 384 bit SHA-384 hash from plain string.]]></description>
+  <param n="data" t="string"><![CDATA[Plain string data to hash]]></param>
+  <script encoded="false"><![CDATA[return CryptoDigest.sha384(data);]]></script>
+</dunes-script-module>

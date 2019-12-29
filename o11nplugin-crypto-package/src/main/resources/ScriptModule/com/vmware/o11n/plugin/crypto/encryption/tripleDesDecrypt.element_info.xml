@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">com.vmware.o11n.plugin.crypto.encryption</entry>
+<entry key="name">tripleDesDecrypt</entry>
+<entry key="type">ScriptModule</entry>
+<entry key="id">62a689ba-5486-4440-8927-ba4b7148319a</entry>
+</properties>

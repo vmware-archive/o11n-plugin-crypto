@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dunes-script-module name="aesEncrypt" result-type="string" api-version="6.0.0" id="ae60502c-5524-47d7-9f95-c97e3fc95fd1" version="0.0.0" allowed-operations="vef">
+  <description><![CDATA[AES Encryption. Returns encrypted data Base64 encoded.]]></description>
+  <param n="dataB64" t="string"><![CDATA[Data to encrypt Base64 encoded.]]></param>
+  <param n="secretB64" t="string"><![CDATA[Encryption secret Base64 encoded. For AES128 this should be 128 bits (16 bytes) long. For AES256 this should be 256 bits (32 bytes) long.]]></param>
+  <param n="ivB64" t="string"><![CDATA[Initialization vector Base64 encoded. 16 bytes long.]]></param>
+  <script encoded="false"><![CDATA[return CryptoEncryption.aesEncrypt(dataB64, secretB64, ivB64);]]></script>
+</dunes-script-module>

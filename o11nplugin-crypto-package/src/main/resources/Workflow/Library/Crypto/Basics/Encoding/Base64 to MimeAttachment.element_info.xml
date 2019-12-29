@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>Exported from [server]</comment>
-<entry key="categoryPath">Library.Encryption Helper Plugin</entry>
-<entry key="name">Hello world</entry>
+<entry key="categoryPath">Library.Crypto.Basics.Encoding</entry>
+<entry key="name">Base64 to MimeAttachment</entry>
 <entry key="type">Workflow</entry>
-<entry key="id">9993475837951223458723498186056964020</entry>
+<entry key="id">7088a18d-8695-405a-9ee1-e54f792df27e</entry>
 </properties>

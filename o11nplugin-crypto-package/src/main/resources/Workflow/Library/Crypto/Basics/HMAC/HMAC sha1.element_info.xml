@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">Library.Crypto.Basics.HMAC</entry>
+<entry key="name">HMAC sha1</entry>
+<entry key="type">Workflow</entry>
+<entry key="id">b5239e6c-dce0-4ab5-9298-73b736eacf63</entry>
+</properties>
