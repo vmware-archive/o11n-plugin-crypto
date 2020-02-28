@@ -61,7 +61,7 @@ public class CryptoCertificateServiceTest {
 	public void remoteCertVmware() throws KeyManagementException, NoSuchAlgorithmException, IOException, CertificateParsingException, InvalidNameException, InvalidKeySpecException {
 		URL vmwareUrl = new URL(CryptoTestData.vmwareUrl);
 		List<X509Certificate> certs = service.getCertHttps(vmwareUrl);
-		assertEquals("VMware.com cert count", 2, certs.size());
+		assertEquals("VMware.com cert count", 3, certs.size());
 		assertTrue("VMware.com cert SAN count greater than 0", 0 < service.getSubjectAlternativeNames(certs.get(0)).size());
 		assertEquals("Intermediary cert should have empty SAN", 0, service.getSubjectAlternativeNames(certs.get(1)).size());
 		assertEquals("VMware.com issued to CN", CryptoTestData.vmwareIssuedTo, service.parseDN(certs.get(0).getSubjectDN().getName()).get("CN"));
