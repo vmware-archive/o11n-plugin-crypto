@@ -3,3 +3,4 @@
 .classpath
 target/
 o11nplugin-crypto/src/main/dar/VSO-INF/vso.xml
+pom.xml.versionsBackup
