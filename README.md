@@ -17,7 +17,7 @@ Add it to your Orchestrator as any other plugin.
 
 ### Prerequisites
 
-* vRealize Orchestrator (vRO) 7.0 or greater
+* vRealize Orchestrator (vRO) 7.0 or greater including vRO 8.0.X
 
 ### Build From Source
 
