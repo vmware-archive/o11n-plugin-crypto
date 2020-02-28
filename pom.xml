@@ -11,6 +11,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <vco.version>7.1.0</vco.version>
     <repoUrl>http://192.168.241.44:7100/vco-repo</repoUrl>
+    <installation.mode>always</installation.mode>
   </properties>
 
   <repositories>
