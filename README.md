@@ -7,7 +7,9 @@ When an integration or automation project with vRO needed some encryption, devel
 
 This plugin provides similar methods, is compatible with binary data and is exponentially more efficient with CPU time.
 
-![](crypto_api_explorer.png)
+| vRO 7 API Explorer view | vRO 8 API Explorer view |
+| --- | --- |
+| ![Crypto Plugin shown in api explorer from vRO 7](crypto_api_explorer.png) | ![Crypto Plugin shown in api explorer from vRO 8](vRO8_crypto_api_explorer.png) |
 
 ## Try it out
 
@@ -17,7 +19,7 @@ Add it to your Orchestrator as any other plugin.
 
 ### Prerequisites
 
-* vRealize Orchestrator (vRO) 7.0 or greater including vRO 8.0.X
+* vRealize Orchestrator (vRO) 7.0 or greater including vRO 8.x.  Last Validated on vRO 8.5.0
 
 ### Build From Source
 
